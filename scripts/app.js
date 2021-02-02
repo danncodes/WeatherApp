@@ -30,15 +30,13 @@ const updateUI = data => {
 
 	let timeSrc = null;
 
-	if (weather.IsDayTime === true) {
+	if (weather.IsDayTime) {
 		timeSrc = 'img/day.svg';
 	} else {
 		timeSrc = 'img/night.svg';
 	}
 
 	time.setAttribute('src', timeSrc);
-
-	console.log(data);
 
 	if (card.classList.contains('d-none')) {
 		card.classList.remove('d-none');
@@ -69,11 +67,11 @@ cityForm.addEventListener('submit', e => {
 		.catch(err => console.log(err));
 
 	// Set Local Storage
-	localStorage.setItem('city', city);
+	localStorage.setItem('@WeatherApp:city', city);
 });
 
 // Run Update City and Update User Interface if Data Exisits on Local Storage
-if (localStorage.getItem('city')) {
+if (localStorage.getItem('@WeatherApp:city')) {
 	updateCity(localStorage.getItem('city'))
 		.then(data => updateUI(data))
 		.catch(err => console.log(err));
